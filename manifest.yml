@@ -1,0 +1,10 @@
+applications:
+- services:
+  - MongoLab-mk
+  disk_quota: 1024M
+  host: hangmangame
+  name: HangmanGame
+  path: webStarterApp.war
+  domain: ng.bluemix.net
+  instances: 1
+  memory: 512M
