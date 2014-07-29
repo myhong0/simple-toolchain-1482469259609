@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.bluemix.hangman.data.MongoConnection;
+import com.bluemix.hangman.data.CloudantConnection;
 import com.bluemix.hangman.model.Category;
 
 /**
@@ -46,8 +46,8 @@ public class LoadIndex extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		MongoConnection mongoConnection = new MongoConnection();
-		List<Category> categories = mongoConnection.getCategories();
+		CloudantConnection cloudantConnection = new CloudantConnection();
+		List<Category> categories = cloudantConnection.getCategories();
 		request.setAttribute("categories", categories);	
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}

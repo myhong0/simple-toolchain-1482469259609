@@ -8,9 +8,7 @@
     <property name="source" value="1.5"/>
     <path id="classpathDir">
         <pathelement location="bin"/>
-        <pathelement location="WebContent/WEB-INF/lib/jsr311-api-1.1.1.jar"/>
-    	<pathelement location="WebContent/WEB-INF/lib/wink-1.2.1-incubating.jar"/>
-    	<pathelement location="WebContent/WEB-INF/lib/mongo-java-driver-2.12.2.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/org.ektorp-1.4.2.jar"/>
     </path>
     <target name="init">
         <mkdir dir="bin"/>

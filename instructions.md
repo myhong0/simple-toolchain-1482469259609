@@ -19,6 +19,6 @@ This sample application demonstrates how to write a Java Web application (powere
 6. Compile the Java code and generate the war package using ant.
 7. Deploy your app:
 
-		cf push HangmanGame -p webStarterApp.war
+		cf push HangmanGame -p HangmanGame.war
 
 8. Access your app: [http://yourdomain.ng.bluemix.net](http://yourdomain.ng.bluemix.net)

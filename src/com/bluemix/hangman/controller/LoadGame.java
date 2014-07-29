@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.bluemix.hangman.data.MongoConnection;
+import com.bluemix.hangman.data.CloudantConnection;
 import com.bluemix.hangman.model.Word;
 
 /**
@@ -48,8 +48,8 @@ public class LoadGame extends HttpServlet {
 		  String value = request.getParameter("value");
 		  
 		  if ((action != null)&&(value != null)) {
-				MongoConnection mongo = new MongoConnection();
-				Word word = mongo.getRandomWordByCategory(value);
+				CloudantConnection cloudantConnection = new CloudantConnection();
+				Word word = cloudantConnection.getRandomWordByCategory(value);
 				if(word!=null){
 					response.setContentType("text/html");
 					response.getWriter().write(word.getName());
