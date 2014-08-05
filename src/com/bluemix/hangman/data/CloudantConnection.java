@@ -1,10 +1,11 @@
 package com.bluemix.hangman.data;
 
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.apache.wink.json4j.JSONArray;
+import org.apache.wink.json4j.JSONObject;
 import org.ektorp.CouchDbConnector;
 import org.ektorp.CouchDbInstance;
 import org.ektorp.http.HttpClient;
@@ -21,12 +22,25 @@ public class CloudantConnection {
 	
 	HttpClient httpClient;
 	
-	public CloudantConnection(){
-		try {
-			httpClient = new StdHttpClient.Builder()
-			.url("https://<username>:<password>@<host>")
-			.build();
-		} catch (MalformedURLException e) {
+	public CloudantConnection(){		
+		try{
+			JSONObject obj = new JSONObject(System.getenv("VCAP_SERVICES"));
+			String[] names = JSONObject.getNames(obj);
+		
+			if (names != null) {
+				for (String name : names) {
+					if (name.equals("cloudantNoSQLDB")) {
+						JSONArray val = obj.getJSONArray(name);
+						JSONObject serviceAttr = val.getJSONObject(0);
+						JSONObject credentials = serviceAttr.getJSONObject("credentials");
+						httpClient = new StdHttpClient.Builder()
+						.url(credentials.getString("url"))
+						.build();
+						break;
+					}
+				}
+			}
+		}catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
