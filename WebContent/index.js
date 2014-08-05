@@ -1,67 +1,29 @@
 var globalWord;
-var failedChances;
+var whitespace;
+var correctLetters;
 var globalArrayIndex;
 var globalImageArray = ["img/hangImage0.gif","img/hangImage1.gif","img/hangImage2.gif","img/hangImage3.gif","img/hangImage4.gif",
                         "img/hangImage5.gif","img/hangImage6.gif"];
 
-
-/*
- * Returns a new XMLHttpRequest object, or false if this browser
- * doesn't support it
- */
-function newXMLHttpRequest() {
-  var xmlreq = false;
-
-  if (window.XMLHttpRequest) {
-    xmlreq = new XMLHttpRequest();
-
-  } else if (window.ActiveXObject) {
-
-    try {
-      xmlreq = new ActiveXObject("Msxml2.XMLHTTP");
-
-    } catch (e1) {
-      try {
-        xmlreq = new ActiveXObject("Microsoft.XMLHTTP");
-      } catch (e2) {
-        // Unable to create an XMLHttpRequest using ActiveX
-      }
-    }
-  }
-  return xmlreq;
-}
-
-function getReadyStateHandler(req, responseXmlHandler) {
-	  return function () {
-	    // If the request's status is "complete"
-	    if (req.readyState == 4) {
-	      if (req.status == 200) {
-	        responseXmlHandler(req.responseText);
-	      } else {
-	        // An HTTP problem has occurred
-	        alert("HTTP error: "+req.status);
-	      }
-	    }
-	  };
-}
-
 function loadWord(category) {
-	  // Obtain an XMLHttpRequest instance
-	  var req = newXMLHttpRequest();
-
-	  var handlerFunction = getReadyStateHandler(req, updateWord);
-	  
-	  req.onreadystatechange = handlerFunction;
-	  req.open("POST", "game.do", true);
-	  req.setRequestHeader("Content-Type", 
-	                       "application/x-www-form-urlencoded");
-	  req.send("action=loadWord&value="+category);
+	dojo.xhrPost({
+			url: "game.do",
+			postData: "action=loadWord&value="+category,
+		    handleAs: "text",
+		    load: function(text){
+		    	updateWord(text);
+		    	},
+		    error: function(error){
+		    	alert(error);
+		      }	    	
+	});
 }
 
 function updateWord(word) {
 	 document.getElementById("hangmanImage").style.visibility = "visible";
 	 globalWord = word;
-	 failedChances = 0;
+	 whitespace = word.split(" ").length - 1;
+	 correctLetters = 0;
 	 globalArrayIndex = 0;
 	 loadWordTable(word);
 	 loadLettersTable();
@@ -98,7 +60,7 @@ function updateImage(index){
 }
 
 function verifyLetter(letter) {
-	if(failedChances<globalWord.split('').length){
+	if(correctLetters<globalWord.split('').length-whitespace){
 		if (globalArrayIndex < 6){
 			globalArrayIndex+= updateGame(letter);
 			if(globalArrayIndex == 6){
@@ -118,7 +80,7 @@ function updateGame(letter) {
 	for(var index=0; index<wordSplit.length; index++){
 		if(letter == wordSplit[index]){
 			document.getElementById("wordLetter"+index).innerHTML = wordSplit[index];
-			failedChances+=1;
+			correctLetters+=1;
 			find = true;
 		}
 	}

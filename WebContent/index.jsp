@@ -24,6 +24,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<link rel="stylesheet" href="style.css" />
 	<script src="index.js"></script>
+	<script src="dojo.js"></script>
 </head>
 <body>
 	<div id="container" >
