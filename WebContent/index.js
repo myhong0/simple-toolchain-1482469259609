@@ -2,8 +2,8 @@ var globalWord;
 var whitespace;
 var correctLetters;
 var globalArrayIndex;
-var globalImageArray = ["img/hangImage0.gif","img/hangImage1.gif","img/hangImage2.gif","img/hangImage3.gif","img/hangImage4.gif",
-                        "img/hangImage5.gif","img/hangImage6.gif"];
+var globalImageArray = ["img/hangImage0.png","img/hangImage1.png","img/hangImage2.png","img/hangImage3.png","img/hangImage4.png",
+                        "img/hangImage5.png","img/hangImage6.png"];
 
 function loadWord(category) {
 	dojo.xhrPost({
