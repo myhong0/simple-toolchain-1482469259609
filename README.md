@@ -10,4 +10,5 @@ git clone https://hub.jazz.net/git/morenoli/hangmangame
 
 Running the Hangman Game
 
-See the instructions in Build an Hangman game with Java, Ajax and Cloudant NoSQL DB article for more information about how to build and runt this sample in Bluemix.
+See the instructions in Build an Hangman game with Java, Ajax and Cloudant NoSQL DB article for more information about how to build and runt this sample in Bluemix:
+http://www.ibm.com/developerworks/java/library/j-hangman-app/index.html
