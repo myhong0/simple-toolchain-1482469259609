@@ -15,27 +15,36 @@
 **********************************************************************************/
 package com.bluemix.hangman.model;
 
-import org.bson.types.ObjectId;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+@JsonIgnoreProperties({"id", "revision"})
 public class Word {
 	
-	private ObjectId id;
+	@JsonProperty("_id")
+	private String id;
+	
+	@JsonProperty("_rev")
+	private String revision;
+	
 	private String name;
 	private String category_id;
 	
-	public Word(ObjectId id, String name, String category_id){
+	public void setId(String id) {
 		this.id = id;
-		this.name = name;
-		this.category_id = category_id;
 	}
 	
-	public ObjectId getId() {
+	public String getId() {
 		return id;
 	}
 	
-	public void setId(ObjectId id) {
-		this.id = id;
-	}
+	public void setRevision(String revision) {
+        this.revision = revision;
+    }
+	
+	public String getRevision() {
+        return revision;
+    }
 	
 	public String getName() {
 		return name;

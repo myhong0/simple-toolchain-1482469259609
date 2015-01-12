@@ -15,15 +15,19 @@
 **********************************************************************************/
 package com.bluemix.hangman.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@JsonIgnoreProperties({"id", "revision"})
 public class Category {
 	
+	@JsonProperty("_id")
 	private String id;
-	private String name;
 	
-	public Category(String id, String name){
-		this.id = id;
-		this.name = name;
-	}
+	@JsonProperty("_rev")
+	private String revision;
+	
+	private String name;
 	
 	public void setId(String id){
 		this.id = id;
@@ -32,6 +36,14 @@ public class Category {
 	public String getId(){
 		return this.id;
 	}
+	
+	public void setRevision(String revision) {
+        this.revision = revision;
+    }
+	
+	public String getRevision() {
+        return revision;
+    }
 	
 	public void setName(String name){
 		this.name = name;
